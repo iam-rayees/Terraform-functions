@@ -1,0 +1,10 @@
+variable "aws_region" {}
+variable "vpc_cidr" {}
+variable "vpc_name" {}
+variable "public_cidr" {}
+variable "az_name" {}
+variable "private_cidr" {}
+variable "env" {}
+variable "service_ports" {}
+variable "amis" {}
+variable "key_name" {}
