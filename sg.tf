@@ -1,9 +1,10 @@
 resource "aws_security_group" "allow_all" {
+  name        = "${var.vpc_name}_allow_all"
   description = "Allow all inbound traffic"
-  vpc_id      = aws_vpc.VPC-Terra.id
+  vpc_id      = aws_vpc.Vpc_Terra.id
 
   dynamic "ingress" {
-    for_each = var.service_ports
+    for_each = var.service_ports[*]
     content {
       from_port   = ingress.value
       to_port     = ingress.value
@@ -11,19 +12,10 @@ resource "aws_security_group" "allow_all" {
       cidr_blocks = ["0.0.0.0/0"]
     }
   }
-
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name        = "${var.vpc_name}-SG"
-    Owner       = local.Owner
-    costcenter  = local.costcenter
-    TeamDL      = local.TeamDL
-    environment = var.env
   }
 }

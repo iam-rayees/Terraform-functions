@@ -1,10 +1,9 @@
 variable "aws_region" {}
 variable "vpc_cidr" {}
 variable "vpc_name" {}
-variable "public_cidr" {}
+variable "public_subnet_cidr" {}
 variable "az_name" {}
-variable "private_cidr" {}
-variable "env" {}
+variable "private_subnet_cidr" {}
+variable "environment" {}
 variable "service_ports" {}
 variable "amis" {}
-variable "key_name" {}

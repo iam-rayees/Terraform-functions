@@ -1,18 +1,19 @@
-resource "aws_eip" "Elastic-IP" {
+resource "aws_eip" "elastic_ip" {
   domain = "vpc"
 }
 
-resource "aws_nat_gateway" "Nat-GateWay" {
-  allocation_id = aws_eip.Elastic-IP.id
-  subnet_id     = aws_subnet.public-subnet[0].id
+resource "aws_nat_gateway" "nat_gw" {
+  allocation_id = aws_eip.elastic_ip.id
+  subnet_id     = aws_subnet.public_subnets[0].id
 
   tags = {
-    Name        = "${var.vpc_name}-NATgateway"
-    Owner       = local.Owner
-    costcenter  = local.costcenter
-    TeamDL      = local.TeamDL
-    environment = var.env
-
+    Name       = "${var.vpc_name}_NGW"
+    Owner      = local.Owner
+    TeamDL     = local.TeamDL
+    costcenter = local.costcenter
   }
-  depends_on = [aws_internet_gateway.IGW-Terra]
+
+  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # on the Internet Gateway for the VPC.
+  depends_on = [aws_internet_gateway.IGW_Tera]
 }
