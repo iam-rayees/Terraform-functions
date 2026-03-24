@@ -8,6 +8,7 @@ terraform {
     bucket = "rayeez-terra-bucket-01"
     key    = "development.tfstate"
     region = "us-east-1"
+    use_lockfile = true
   }
 }
 
